@@ -269,8 +269,10 @@ EVP_serialize(EVPobject *self, PyObject* unused)
   unsigned char* serialized;
   unsigned int i;
   long ctx_size = state_size(self);
-  if (ctx_size < 0)
-     return NULL;  // TODO helpful exception
+  if (ctx_size < 0) {
+     PyErr_SetString(PyExc_ValueError, "Invalid hash name");
+     return NULL;
+   }
   serialized = PyMem_Malloc(ctx_size);
   if (!serialized)
     return PyErr_NoMemory();
@@ -293,11 +295,15 @@ EVP_deserialize(EVPobject *self, PyObject* args)
   int len;
   int i;
 
-  if (!PyArg_ParseTuple(args, "s#", &state, &len))
-    return NULL;  // TODO helpful exception
+  if (!PyArg_ParseTuple(args, "s#", &state, &len)) {
+    PyErr_SetString(PyExc_TypeError, "Invalid state, must be a bytes object");
+    return NULL;
+  }
 
-  if (sizeof(SHA512_CTX) != len)
-    return NULL;  // TODO helpful exception
+  if (state_size(self) != len) {
+    PyErr_SetString(PyExc_ValueError, "Invalid state length");
+    return NULL;
+  }
 
 #ifdef WITH_THREAD
   if (self->lock != NULL) {

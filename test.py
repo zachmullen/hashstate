@@ -17,9 +17,21 @@ def test_serialization(alg):
     h1.update(b'hello')
     assert h1.serialize() != h2.serialize()
 
-    h2.deserialize(h1.serialize())
+    assert h2.deserialize(h1.serialize()) is None
     assert h1.digest() == h2.digest()
 
     h1.update(b'foo')
     h2.update(b'foo')
     assert h1.digest() == h2.digest()
+
+
+def test_bad_deserialization_type():
+    with pytest.raises(TypeError) as e:
+        hashstate.openssl_sha1().deserialize(1234)
+    assert 'Invalid state, must be a bytes object' == str(e.value)
+
+
+def test_bad_deserialize_length():
+    with pytest.raises(ValueError) as e:
+        hashstate.openssl_sha512().deserialize(b'foo')
+    assert 'Invalid state length' == str(e.value)
