@@ -71,6 +71,7 @@
 /* We use the object interface to discover what hashes OpenSSL supports. */
 #include <openssl/objects.h>
 #include "openssl/err.h"
+#include <openssl/md5.h>
 #include <openssl/sha.h>
 
 #define MUNCH_SIZE INT_MAX
@@ -240,6 +241,25 @@ EVP_hexdigest(EVPobject *self, PyObject *unused)
     return retval;
 }
 
+long state_size(EVPobject* obj)
+{
+  char *name = PyUnicode_AsUTF8(obj->name);
+
+  if (!strcmp(name, "md5")) {
+    return sizeof(MD5_CTX);
+  }
+  if (!strcmp(name, "sha1")) {
+    return sizeof(SHA_CTX);
+  }
+  if (!strcmp(name, "sha256") || !strcmp(name, "sha224")) {
+    return sizeof(SHA256_CTX);
+  }
+  if (!strcmp(name, "sha512") || !strcmp(name, "sha384")) {
+    return sizeof(SHA512_CTX);
+  }
+  return -1;
+}
+
 PyDoc_STRVAR(EVP_serialize__doc__,
 "Serialize the internal state of this hash.");
 
@@ -248,7 +268,9 @@ EVP_serialize(EVPobject *self, PyObject* unused)
 {
   unsigned char* serialized;
   unsigned int i;
-  long ctx_size = sizeof(SHA512_CTX); // TODO only working for sha512...
+  long ctx_size = state_size(self);
+  if (ctx_size < 0)
+     return NULL;  // TODO helpful exception
   serialized = PyMem_Malloc(ctx_size);
   if (!serialized)
     return PyErr_NoMemory();
