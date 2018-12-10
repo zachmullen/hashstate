@@ -70,7 +70,7 @@
 #include <openssl/hmac.h>
 /* We use the object interface to discover what hashes OpenSSL supports. */
 #include <openssl/objects.h>
-#include "openssl/err.h"
+#include <openssl/err.h>
 #include <openssl/md5.h>
 #include <openssl/sha.h>
 
@@ -260,6 +260,7 @@ long state_size(EVPobject* obj)
   return -1;
 }
 
+// BEGIN ZACH STUFF ========================================================
 PyDoc_STRVAR(EVP_serialize__doc__,
 "Serialize the internal state of this hash.");
 
@@ -328,6 +329,7 @@ EVP_deserialize(EVPobject *self, PyObject* args)
 
   Py_RETURN_NONE;
 }
+// END ZACH STUFF ========================================================
 
 PyDoc_STRVAR(EVP_update__doc__,
 "Update this hash object's state with the provided string.");
