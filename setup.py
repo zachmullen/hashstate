@@ -10,7 +10,7 @@ c_ext = Extension(
 
 setup(
     name='hashstate',
-    version='1.0',
-    description='Serialize hash objects',
+    version='0.1',
+    description='Serializable hash objects',
     ext_modules=[c_ext]
 )

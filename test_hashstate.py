@@ -6,7 +6,7 @@ ALGS = {'md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512'}
 
 @pytest.mark.parametrize('alg', ALGS)
 def test_serialization(alg):
-    ctor = getattr(hashstate, 'openssl_' + alg)
+    ctor = getattr(hashstate, alg)
     h1 = ctor()
     h2 = ctor()
     assert h1.serialize() == h2.serialize()
@@ -27,11 +27,11 @@ def test_serialization(alg):
 
 def test_bad_deserialization_type():
     with pytest.raises(TypeError) as e:
-        hashstate.openssl_sha1().deserialize(1234)
+        hashstate.sha1().deserialize(1234)
     assert 'Invalid state, must be a bytes object' == str(e.value)
 
 
 def test_bad_deserialize_length():
     with pytest.raises(ValueError) as e:
-        hashstate.openssl_sha512().deserialize(b'foo')
+        hashstate.sha512().deserialize(b'foo')
     assert 'Invalid state length' == str(e.value)
