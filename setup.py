@@ -14,8 +14,17 @@ setup(
     version='0.2.1',
     description='Serializable hash objects',
     url='https://github.com/zachmullen/hashstate',
+    license='MIT',
     long_description=readme,
     long_description_content_type='text/markdown',
     packages=['hashstate'],
-    ext_modules=[c_ext]
+    ext_modules=[c_ext],
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: Developers',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3'
+    ]
 )
