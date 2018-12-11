@@ -28,7 +28,7 @@ assert hash1.digest() == hash2.digest()
 
 Build the package:
 
-    python setup.py bdist_wheel
+    python setup.py sdist bdist_wheel
 
 If building a MacOS distribution package, also run:
 
