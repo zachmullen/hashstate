@@ -23,3 +23,14 @@ hash2 = hashstate.sha512()
 hash2.deserialize(s)
 assert hash1.digest() == hash2.digest()
 ```
+
+## Developers
+
+Build the package:
+
+    python setup.py bdist_wheel
+
+If building a MacOS distribution package, also run:
+
+    delocate-wheel ./dist/*.whl
+```

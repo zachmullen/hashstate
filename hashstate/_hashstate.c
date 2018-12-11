@@ -980,7 +980,7 @@ static struct PyModuleDef hashstatemodule = {
 };
 
 PyMODINIT_FUNC
-PyInit_hashstate(void)
+PyInit__hashstate(void)
 {
     PyObject *m, *openssl_md_meth_names;
 
