@@ -13,6 +13,7 @@ setup(
     name='hashstate',
     version='0.2.0',
     description='Serializable hash objects',
+    url='https://github.com/zachmullen/hashstate',
     long_description=readme,
     long_description_content_type='text/markdown',
     packages=['hashstate'],
