@@ -37,4 +37,3 @@ If building a MacOS distribution package, also run:
 Upload to pypi
 
     twine upload dist/*
-```
