@@ -30,9 +30,14 @@ Build the package:
 
     python setup.py sdist bdist_wheel
 
-If building a MacOS distribution package, also run:
+If building a MacOS wheel, also run:
 
-    delocate-wheel ./dist/*.whl
+    delocate-wheel ./dist/*-macosx_*.whl
+
+Build the linux bdist_wheels (64-bit only at the moment):
+
+    docker build -t manylinux-hashstate .
+    docker run --rm -v $(pwd)/dist:/dist manylinux-hashstate
 
 Upload to pypi
 
