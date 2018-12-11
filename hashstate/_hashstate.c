@@ -294,17 +294,19 @@ EVP_deserialize(EVPobject *self, PyObject* args)
   }
 
 #ifdef WITH_THREAD
+  // TODO If we care about thread safety, we need to use AllocateLock here
+  // instead of just checking if the lock is null
   if (self->lock != NULL) {
       Py_BEGIN_ALLOW_THREADS
       PyThread_acquire_lock(self->lock, 1);
-      self->ctx.md_data = (void*)state;
+      memcpy(self->ctx.md_data, state, len);
       PyThread_release_lock(self->lock);
       Py_END_ALLOW_THREADS
   } else {
-      self->ctx.md_data = (void*)state;
+      memcpy(self->ctx.md_data, state, len);
   }
 #else
-  self->ctx.md_data = (void*)state;
+  memcpy(self->ctx.md_data, state, len);
 #endif
 
   Py_RETURN_NONE;
