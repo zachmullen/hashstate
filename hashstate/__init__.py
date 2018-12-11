@@ -1,1 +1,1 @@
-from _hashstate import *
+from ._hashstate import *

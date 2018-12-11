@@ -8,7 +8,7 @@ c_ext = Extension(
 
 setup(
     name='hashstate',
-    version='0.1.2',
+    version='0.1.3',
     description='Serializable hash objects',
     packages=['hashstate'],
     ext_modules=[c_ext]
