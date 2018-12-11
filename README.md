@@ -33,4 +33,8 @@ Build the package:
 If building a MacOS distribution package, also run:
 
     delocate-wheel ./dist/*.whl
+
+Upload to pypi
+
+    twine upload dist/*
 ```

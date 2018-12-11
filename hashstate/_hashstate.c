@@ -488,7 +488,7 @@ digest_size -- number of bytes in this hashes output\n");
 
 static PyTypeObject EVPtype = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    "hashstate.HASH",    /*tp_name*/
+    "hashstate._hashstate.HASH",  /*tp_name*/
     sizeof(EVPobject),  /*tp_basicsize*/
     0,                  /*tp_itemsize*/
     /* methods */
@@ -969,7 +969,7 @@ static struct PyMethodDef EVP_functions[] = {
 
 static struct PyModuleDef hashstatemodule = {
     PyModuleDef_HEAD_INIT,
-    "hashstate",
+    "hashstate._hashstate",
     NULL,
     -1,
     EVP_functions,

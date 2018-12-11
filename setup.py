@@ -1,4 +1,4 @@
-from setuptools import Extension, setup, find_packages
+from setuptools import setup, Extension
 
 c_ext = Extension(
     'hashstate._hashstate',
@@ -8,8 +8,8 @@ c_ext = Extension(
 
 setup(
     name='hashstate',
-    version='0.1',
+    version='0.1.2',
     description='Serializable hash objects',
-    packages=find_packages(),
+    packages=['hashstate'],
     ext_modules=[c_ext]
 )
