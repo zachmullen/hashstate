@@ -260,7 +260,6 @@ long state_size(EVPobject* obj)
   return -1;
 }
 
-// BEGIN ZACH STUFF ========================================================
 PyDoc_STRVAR(EVP_serialize__doc__,
 "Serialize the internal state of this hash.");
 
@@ -329,7 +328,6 @@ EVP_deserialize(EVPobject *self, PyObject* args)
 
   Py_RETURN_NONE;
 }
-// END ZACH STUFF ========================================================
 
 PyDoc_STRVAR(EVP_update__doc__,
 "Update this hash object's state with the provided string.");
