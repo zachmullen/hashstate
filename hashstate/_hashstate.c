@@ -266,7 +266,9 @@ EVP_serialize(EVPobject *self, PyObject* unused)
   if (!serialized)
     return PyErr_NoMemory();
 
+  ENTER_HASHLIB(self);
   memcpy(serialized, self->ctx.md_data, ctx_size);
+  LEAVE_HASHLIB(self);
   PyObject* retval = PyBytes_FromStringAndSize((const char*)serialized, ctx_size);
   PyMem_Free(serialized);
   return retval;
