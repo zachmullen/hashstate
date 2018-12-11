@@ -11,7 +11,7 @@ c_ext = Extension(
 
 setup(
     name='hashstate',
-    version='0.2.0',
+    version='0.2.1',
     description='Serializable hash objects',
     url='https://github.com/zachmullen/hashstate',
     long_description=readme,

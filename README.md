@@ -26,13 +26,13 @@ assert hash1.digest() == hash2.digest()
 
 ## Developers
 
-Build the package:
+Build the package (requires openssl on your build paths):
 
     python setup.py sdist bdist_wheel
 
 If building a MacOS wheel, also run:
 
-    delocate-wheel ./dist/*-macosx_*.whl
+    delocate-wheel -v ./dist/*-macosx_*.whl
 
 Build the linux bdist_wheels (64-bit only at the moment):
 
