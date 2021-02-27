@@ -1,17 +1,12 @@
-from setuptools import setup, Extension
+from setuptools import Extension, setup
 
 with open('README.md') as f:
     readme = f.read()
 
-c_ext = Extension(
-    'hashstate._hashstate',
-    sources=['hashstate/_hashstate.c'],
-    libraries=['ssl']
-)
+c_ext = Extension('hashstate._hashstate', sources=['hashstate/_hashstate.c'], libraries=['ssl'])
 
 setup(
     name='hashstate',
-    version='0.2.1',
     description='Serializable hash objects',
     url='https://github.com/zachmullen/hashstate',
     license='MIT',
@@ -25,6 +20,6 @@ setup(
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3'
-    ]
+        'Programming Language :: Python :: 3',
+    ],
 )
